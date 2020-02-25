@@ -6,6 +6,8 @@ import {
   CLEAR_MARK
 } from "../constants/ActionTypes";
 
+// let initialState: any;
+
 const initialState = [
   {
     id: 0,
@@ -14,7 +16,9 @@ const initialState = [
   }
 ];
 
-export default function todos(state = initialState, action: any) {
+const todos = (state = initialState, action: any) => {
+  // await fetchData();
+  // state = initialState;
   switch (action.type) {
     case ADD_TODO:
       return [
@@ -27,23 +31,25 @@ export default function todos(state = initialState, action: any) {
       ];
 
     case MARK_TODO:
-      return state.map(todo =>
+      return state.map((todo: any) =>
         todo.id === action.id ? { ...todo, check: !todo.check } : todo
       );
 
     case DELETE_TODO:
-      return state.filter(todo => todo.id !== action.id);
+      return state.filter((todo: any) => todo.id !== action.id);
 
     case MARK_ALL:
-      const areAllMarked = state.every(todo => todo.check);
-      return state.map(todo => ({ ...todo, check: !areAllMarked }));
+      const areAllMarked = state.every((todo: any) => todo.check);
+      return state.map((todo: any) => ({ ...todo, check: !areAllMarked }));
 
     case CLEAR_MARK:
       // return state.filter(todo => todo.check === false);
       // const areAllMarked2 = state.every(todo => !todo.check);
-      return state.map(todo => ({ ...todo, check: false }));
+      return state.map((todo: any) => ({ ...todo, check: false }));
 
     default:
       return state;
   }
-}
+};
+
+export default todos;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TodoList from "./TodoList";
 import { bindActionCreators } from "redux";
 import * as TodoActions from "./actions/TodoActions";
@@ -15,6 +15,16 @@ const App = ({ todos, action }: IProps) => {
   // const [actions] = useState(action);
   // const todos = todo;
   // console.log(todos, "where");
+  useEffect(() => {
+    fetch("http://localhost:3000/todo", {
+      method: "GET"
+    })
+      .then(res => res.json())
+      .then(respose => {
+        todos = respose;
+        console.log(respose, "here");
+      });
+  }, []);
 
   return (
     <div>
