@@ -1,13 +1,53 @@
-import React from "react";
-import "./App.css"
+import React, { useState, useEffect } from "react";
+import "./App.css";
 
-function InputHead(){
-    return(
-        <div className="todoInput">
-            {/* <input type="checkbox"/> */}
-            <input type="text" placeholder="Enter your todos..."/>
-        </div>
-    )
+interface IProps {
+  action: any;
 }
 
-export default InputHead
+function InputHead({ action }: IProps) {
+  const [text, changeText] = useState("");
+  const [key, keyDown] = useState(false);
+  const handleSubmit = () => {
+    if (text.length !== 0) {
+      action.addTodo(text);
+      changeText("");
+      console.log(action.addTodo, text);
+    }
+  };
+
+  useEffect(handleSubmit, [key]);
+
+  const [checkBox, changeCheck] = useState(false);
+
+  const handleChangeCheck = () => {
+    if (checkBox) {
+      console.log("mark all");
+      action.markAll();
+    } else {
+      console.log("clear mark");
+      action.clearMarked();
+    }
+  };
+
+  useEffect(handleChangeCheck, [checkBox]);
+
+  return (
+    <div className="todoInput">
+      <input
+        type="checkbox"
+        checked={checkBox}
+        onChange={() => changeCheck(!checkBox)}
+      />
+      <input
+        type="text"
+        placeholder="Enter your todos..."
+        value={text}
+        onChange={e => changeText(e.target.value)}
+        onKeyDown={e => (e.keyCode === 13 ? keyDown(!key) : null)}
+      />
+    </div>
+  );
+}
+
+export default InputHead;
