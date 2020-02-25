@@ -22,10 +22,10 @@ function InputHead({ action }: IProps) {
 
   const handleChangeCheck = () => {
     if (checkBox) {
-      console.log("mark all");
+      //   console.log("mark all");
       action.markAll();
     } else {
-      console.log("clear mark");
+      //   console.log("clear mark");
       action.clearMarked();
     }
   };

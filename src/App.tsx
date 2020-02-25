@@ -14,7 +14,7 @@ const App = ({ todos, action }: IProps) => {
   // const [todos] = useState(todo);
   // const [actions] = useState(action);
   // const todos = todo;
-  console.log(todos, "where");
+  // console.log(todos, "where");
 
   return (
     <div>
