@@ -1,5 +1,5 @@
 {
-  "todo": [
+  "data": [
     {
       "id": 5,
       "name": "take out trash",
@@ -18,7 +18,7 @@
     {
       "id": 8,
       "name": "learn new words",
-      "check": "false"
+      "check": "true"
     }
   ]
 }

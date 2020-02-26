@@ -2,46 +2,69 @@ import React, { useEffect } from "react";
 import TodoList from "./TodoList";
 import { bindActionCreators } from "redux";
 import * as TodoActions from "./actions/TodoActions";
+import * as DataActions from "./actions/dataActions";
 import { connect } from "react-redux";
+// import { fetchData } from "./actions/dataActions";
 import "./App.css";
 
 interface IProps {
   todos: any;
   action: any;
+  dispatch: any;
+  error: any;
+  loading: any;
+  data: any;
+  action2: any;
 }
 
-const App = ({ todos, action }: IProps) => {
-  // const [todos] = useState(todo);
-  // const [actions] = useState(action);
-  // const todos = todo;
-  // console.log(todos, "where");
+const App = ({
+  todos,
+  action,
+  action2,
+  // dispatch,
+  // error,
+  // loading,
+  data
+}: IProps) => {
+  // const App = (props: any) => {
+  //   console.log(props);
   useEffect(() => {
-    fetch("http://localhost:3000/todo", {
-      method: "GET"
-    })
-      .then(res => res.json())
-      .then(respose => {
-        todos = respose;
-        console.log(respose, "here");
-      });
+    console.log("check here", action2);
+    // action2.fetchDataBegin();
+    action2.fetchData();
   }, []);
 
-  return (
-    <div>
-      <TodoList todo={todos} action={action} />
-    </div>
-  );
+  if (data.error) {
+    return <div>Error! {data.error.message}</div>;
+  }
+
+  if (data.loading) {
+    return <div>Loading...</div>;
+  } else {
+    // data.item.map((item: any) => action.addTodo(item.name));
+    // todos = data.item;
+    return (
+      <div>
+        <TodoList todo={data.item} action={action} />
+      </div>
+    );
+  }
 };
 
 function mapStateToProps(state: any) {
   return {
-    todos: state.todos
+    dispatch: state.dispatch,
+    todos: state.dataReducers,
+    data: state.dataReducers,
+    loading: state.loading,
+    error: state.error
   };
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    action: bindActionCreators(TodoActions, dispatch)
+    action: bindActionCreators(TodoActions, dispatch),
+    action2: bindActionCreators(DataActions, dispatch)
   };
 }
 

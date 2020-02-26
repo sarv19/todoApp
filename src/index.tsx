@@ -6,11 +6,16 @@ import * as serviceWorker from "./serviceWorker";
 import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import rootReducers from "./reducers/rootReducers";
+import thunk from "redux-thunk";
 import "./index.css";
 
 const initialState = {};
 
-const store = createStore(rootReducers, initialState, applyMiddleware(logger));
+const store = createStore(
+  rootReducers,
+  initialState,
+  applyMiddleware(logger, thunk)
+);
 
 ReactDOM.render(
   <Provider store={store}>

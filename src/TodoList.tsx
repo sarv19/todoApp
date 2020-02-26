@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import InputHead from "./InputHead";
+import Axios from "axios";
 
 interface IProps {
   todo: any;
@@ -10,21 +11,27 @@ interface IProps {
 const TodoList = ({ todo, action }: IProps) => {
   const ls = todo ? todo : [];
   const todoList = ls.map((item: any, i: any) => {
+    const checked = item.check === "true" ? true : false;
     return (
       <div
         key={i}
         className="todoItem"
         style={{
-          textDecoration: item.check ? "line-through" : "none",
-          fontStyle: item.check ? "italic" : "normal",
-          color: item.check ? "lightgrey" : "black"
+          textDecoration: checked ? "line-through" : "none",
+          fontStyle: checked ? "italic" : "normal",
+          color: checked ? "lightgrey" : "black"
         }}
       >
         <div>
           <input
             type="checkbox"
-            checked={item.check}
-            onChange={() => action.markTodo(item.id)}
+            checked={checked}
+            onChange={() => {
+              action.markTodo(item.id);
+              Axios.patch(`http://localhost:3000/data/${item.id}`, {
+                check: item.check === "true" ? "false" : "true"
+              });
+            }}
           />
           {item.name}
         </div>
