@@ -3,14 +3,17 @@ import "./App.css";
 
 interface IProps {
   action: any;
+  addTodo: any;
+  changeCheckAll: any;
 }
 
-function InputHead({ action }: IProps) {
+function InputHead({ action, addTodo, changeCheckAll }: IProps) {
   const [text, changeText] = useState("");
   const [key, keyDown] = useState(false);
   const handleSubmit = () => {
     if (text.length !== 0) {
       action.addTodo(text);
+      addTodo(text);
       changeText("");
       console.log(action.addTodo, text);
     }
@@ -37,7 +40,11 @@ function InputHead({ action }: IProps) {
       <input
         type="checkbox"
         checked={checkBox}
-        onChange={() => changeCheck(!checkBox)}
+        // onChange={() => changeCheck(!checkBox)}
+        onChange={() => {
+          changeCheck(!checkBox);
+          changeCheckAll(!checkBox);
+        }}
       />
       <input
         type="text"

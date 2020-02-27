@@ -18,7 +18,6 @@ interface IProps {
 }
 
 const App = ({
-  todos,
   action,
   action2,
   // dispatch,

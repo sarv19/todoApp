@@ -1,23 +1,13 @@
 {
   "data": [
     {
-      "id": 5,
-      "name": "take out trash",
-      "check": "false"
-    },
-    {
-      "id": 6,
-      "name": "buy soap",
-      "check": "false"
-    },
-    {
-      "id": 7,
-      "name": "feed the dog",
+      "id": 14,
+      "name": "dog",
       "check": "true"
     },
     {
-      "id": 8,
-      "name": "learn new words",
+      "id": 16,
+      "name": "new item",
       "check": "true"
     }
   ]
