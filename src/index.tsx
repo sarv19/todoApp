@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+// import App from "./App";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { createStore, applyMiddleware } from "redux";
@@ -8,6 +8,7 @@ import logger from "redux-logger";
 import rootReducers from "./reducers/rootReducers";
 import thunk from "redux-thunk";
 import "./index.css";
+import Routes from "./Routes";
 
 const initialState = {};
 
@@ -20,7 +21,8 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <div>
-      <App />
+      {/* <App /> */}
+      <Routes />
     </div>
   </Provider>,
   document.getElementById("root")
