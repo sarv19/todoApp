@@ -11,6 +11,7 @@ interface IProps {
 const TodoList = ({ todo, action }: IProps) => {
   const [ls, setTodo] = useState(todo ? todo : []);
   const [checkAll, changeCheckAll] = useState(false);
+  const [loading, changeLoading] = useState(false);
 
   const handleCheck = (check: any) => {
     changeCheckAll(check);
@@ -23,9 +24,11 @@ const TodoList = ({ todo, action }: IProps) => {
       check: "false"
     };
     const newTodos = [...ls, newData];
+    changeLoading(true);
     Axios.post("http://localhost:3000/data", newData).then(() => {
       setTodo(newTodos);
       // console.log(newTodos, "new list hewe", newTodos[newTodos.length - 1].id);
+      changeLoading(false);
     });
   };
 
@@ -41,8 +44,9 @@ const TodoList = ({ todo, action }: IProps) => {
       const areAllMarked = ls.every((todo: any) => todo.check === "true");
       console.log({ areAllMarked });
       if (!areAllMarked) {
+        // changeLoading(true);
         const toChange = ls.filter((item: any) => item.check === "false");
-        toChange.forEach((item: any) => {
+        toChange.forEach(async (item: any) => {
           Axios.patch(`http://localhost:3000/data/${item.id}`, {
             check: "true"
           }).then(() => {
@@ -50,11 +54,13 @@ const TodoList = ({ todo, action }: IProps) => {
             completeTodo(index);
           });
         });
+        // changeLoading(false);
       }
     } else {
       const areNotMarked = ls.every((todo: any) => todo.check !== "false");
       if (areNotMarked) {
         const toChange = ls.filter((item: any) => item.check === "true");
+        // changeLoading(true);
         toChange.forEach((item: any) => {
           Axios.patch(`http://localhost:3000/data/${item.id}`, {
             check: "false"
@@ -63,15 +69,18 @@ const TodoList = ({ todo, action }: IProps) => {
             completeTodo(index);
           });
         });
+        // changeLoading(false);
       }
     }
   }, [checkAll, ls]);
 
   const removeTodo = (index: any) => {
+    changeLoading(true);
     Axios.delete(`http://localhost:3000/data/${ls[index].id}`).then(() => {
       const newTodo = [...ls];
       newTodo.splice(index, 1);
       setTodo(newTodo);
+      changeLoading(false);
     });
   };
 
@@ -93,12 +102,13 @@ const TodoList = ({ todo, action }: IProps) => {
             checked={checked}
             onChange={() => {
               // action.markTodo(item.id);
-
+              changeLoading(true);
               Axios.patch(`http://localhost:3000/data/${item.id}`, {
                 check: item.check === "true" ? "false" : "true"
               }).then(() => {
                 const index = ls.findIndex((obj: any) => obj.id === item.id);
                 completeTodo(index);
+                changeLoading(false);
               });
             }}
           />
@@ -128,7 +138,15 @@ const TodoList = ({ todo, action }: IProps) => {
           addTodo={addTodo}
           changeCheckAll={handleCheck}
         />
-        {todoList}
+        {loading ? (
+          <div className="lds-facebook">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        ) : (
+          todoList
+        )}
       </div>
     </div>
   );
