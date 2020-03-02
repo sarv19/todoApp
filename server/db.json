@@ -16,7 +16,7 @@
       "check": "true"
     },
     {
-      "name": "buy dog food",
+      "name": "buy dog ",
       "check": "false",
       "id": 23
     },
@@ -31,19 +31,9 @@
       "check": "false"
     },
     {
-      "name": "dogs out",
+      "name": "dogs to the park",
       "check": "false",
       "id": 27
-    },
-    {
-      "name": "go for a walk",
-      "check": "false",
-      "id": 28
-    },
-    {
-      "name": "buy sth",
-      "check": "false",
-      "id": 29
     }
   ]
 }

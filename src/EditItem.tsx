@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import { bindActionCreators } from "redux";
+import * as TodoActions from "./actions/TodoActions";
+import * as DataActions from "./actions/dataActions";
+import { connect } from "react-redux";
 
 const EditItem = (props: any) => {
   const [itemId, setId] = useState(null);
@@ -10,11 +14,13 @@ const EditItem = (props: any) => {
 
   const handleSubmit = () => {
     if (text.length !== 0) {
-      Axios.patch(`http://localhost:3000/data/${id}`, {
-        name: text
-      }).then(() => {
-        window.close();
-      });
+      console.log(props);
+      props.action.editTODO(id, text);
+      //   Axios.patch(`http://localhost:3000/data/${id}`, {
+      //     name: text
+      //   }).then(() => {
+      //     window.close();
+      //   });
     }
   };
 
@@ -44,4 +50,17 @@ const EditItem = (props: any) => {
   );
 };
 
-export default EditItem;
+function mapStateToProps(state: any) {
+  return {
+    data: state.dataReducers
+  };
+}
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    action: bindActionCreators(TodoActions, dispatch),
+    action2: bindActionCreators(DataActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditItem);

@@ -8,7 +8,7 @@ import rootReducers from "./reducers/rootReducers";
 import thunk from "redux-thunk";
 import Routes from "./Routes";
 import createSagaMiddleware from "redux-saga";
-import handleNewMessage from "./sagas";
+import { rootSaga } from "./sagas";
 import "./index.css";
 
 const initialState = {};
@@ -30,5 +30,5 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-sagaMiddleware.run(handleNewMessage);
+sagaMiddleware.run(rootSaga);
 serviceWorker.unregister();

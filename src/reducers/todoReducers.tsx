@@ -3,7 +3,8 @@ import {
   MARK_TODO,
   DELETE_TODO,
   MARK_ALL,
-  CLEAR_MARK
+  CLEAR_MARK,
+  EDIT_TODO
 } from "../constants/ActionTypes";
 
 // let initialState: any;
@@ -33,6 +34,11 @@ const todos = (state = initialState, action: any) => {
     case MARK_TODO:
       return state.map((todo: any) =>
         todo.id === action.id ? { ...todo, check: !todo.check } : todo
+      );
+
+    case EDIT_TODO:
+      return state.map(todo =>
+        todo.id === action.id ? { ...todo, text: action.text } : todo
       );
 
     case DELETE_TODO:
