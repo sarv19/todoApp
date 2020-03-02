@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import * as TodoActions from "./actions/TodoActions";
+import * as DataActions from "./actions/dataActions";
 
 const AddItem = (props: any) => {
   const [text, changeText] = useState("");
@@ -15,10 +17,14 @@ const AddItem = (props: any) => {
       };
       console.log(props);
 
-      Axios.post("http://localhost:3000/data", newData).then(() => {
-        // console.log(newTodos, "new list hewe", newTodos[newTodos.length - 1].id);
-        // window.close();
-      });
+      props.action.addTodo(text);
+
+      // Axios.post("http://localhost:3000/data", newData).then(() => {
+      //   // console.log(newTodos, "new list hewe", newTodos[newTodos.length - 1].id);
+      //   props.action2.fetchDataBegin();
+      //   props.action.addTodo(text);
+      //   // window.close();
+      // });
     }
   };
 
@@ -37,10 +43,17 @@ const AddItem = (props: any) => {
   );
 };
 
-// function mapDispatchToProps(dispatch: any) {
-//   return {
-//     action2: bindActionCreators(DataActions, dispatch)
-//   };
-// }
+function mapStateToProps(state: any) {
+  return {
+    data: state.dataReducers
+  };
+}
 
-export default connect()(AddItem);
+function mapDispatchToProps(dispatch: any) {
+  return {
+    action: bindActionCreators(TodoActions, dispatch),
+    action2: bindActionCreators(DataActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddItem);

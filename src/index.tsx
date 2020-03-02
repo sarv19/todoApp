@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 // import App from "./App";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import logger from "redux-logger";
 import rootReducers from "./reducers/rootReducers";
 import thunk from "redux-thunk";
@@ -18,7 +18,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   rootReducers,
   initialState,
-  applyMiddleware(logger, thunk, sagaMiddleware)
+  compose(applyMiddleware(logger, thunk, sagaMiddleware))
 );
 
 ReactDOM.render(
@@ -31,5 +31,5 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// sagaMiddleware.run(handleNewMessage);
+sagaMiddleware.run(handleNewMessage);
 serviceWorker.unregister();

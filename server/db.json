@@ -3,7 +3,7 @@
     {
       "id": 17,
       "name": "new what",
-      "check": "false"
+      "check": "true"
     },
     {
       "id": 20,
@@ -26,9 +26,14 @@
       "id": 24
     },
     {
-      "name": "buy something",
-      "check": "false",
-      "id": 27
+      "id": 25,
+      "name": "buy snack",
+      "check": "false"
+    },
+    {
+      "id": 26,
+      "name": "take ",
+      "check": "false"
     }
   ]
 }

@@ -29,14 +29,7 @@ const EditItem = (props: any) => {
       });
     }
   }, [itemId]);
-  //   useEffect(() => {
-  //     if (itemId) {
-  //       Axios.get(`http://localhost:3000/data/${itemId}`).then(res => {
-  //         changeText(res.data.name);
-  //         changeID(res.data.id);
-  //       });
-  //     }
-  //   }, [itemId]);
+
   return (
     <div>
       <input
