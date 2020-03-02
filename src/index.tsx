@@ -7,15 +7,18 @@ import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import rootReducers from "./reducers/rootReducers";
 import thunk from "redux-thunk";
-import "./index.css";
 import Routes from "./Routes";
+import createSagaMiddleware from "redux-saga";
+import handleNewMessage from "./sagas";
+import "./index.css";
 
 const initialState = {};
+const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   rootReducers,
   initialState,
-  applyMiddleware(logger, thunk)
+  applyMiddleware(logger, thunk, sagaMiddleware)
 );
 
 ReactDOM.render(
@@ -28,7 +31,5 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+// sagaMiddleware.run(handleNewMessage);
 serviceWorker.unregister();

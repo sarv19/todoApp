@@ -115,9 +115,14 @@ const TodoList = ({ todo, action }: IProps) => {
           {item.name}
         </div>
         <div className="editBtn">
-          {/* <button type="button">Edit</button> */}
+          <a target="_blank" href={`/edit-item/${item.id}`}>
+            <button type="button" className="editBtn-btn">
+              Edit
+            </button>
+          </a>
           <button
             type="button"
+            className="editBtn-btn"
             onClick={() => {
               const index = ls.findIndex((obj: any) => obj.id === item.id);
               removeTodo(index);
