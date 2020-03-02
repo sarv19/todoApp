@@ -53,6 +53,7 @@ function InputHead({ action, addTodo, changeCheckAll }: IProps) {
         onChange={e => changeText(e.target.value)}
         onKeyDown={e => (e.keyCode === 13 ? keyDown(!key) : null)}
       />
+      {/* <button type="button">+ Add New Item</button> */}
     </div>
   );
 }
