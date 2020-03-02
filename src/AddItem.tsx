@@ -11,11 +11,11 @@ const AddItem = (props: any) => {
 
   const handleSubmit = () => {
     if (text.length !== 0) {
-      const newData = {
-        name: text,
-        check: "false"
-      };
-      console.log(props);
+      // const newData = {
+      //   name: text,
+      //   check: "false"
+      // };
+      // console.log(props);
 
       props.action.addTodo(text);
 

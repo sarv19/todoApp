@@ -9,7 +9,7 @@ const handleNewMessage = function* handleNewMessage() {
       name: action.text,
       check: "false"
     });
-    console.log(action, "here here here");
+    // console.log(action, "here here here");
   });
 };
 

@@ -31,9 +31,19 @@
       "check": "false"
     },
     {
-      "id": 26,
-      "name": "take ",
-      "check": "false"
+      "name": "dogs out",
+      "check": "false",
+      "id": 27
+    },
+    {
+      "name": "go for a walk",
+      "check": "false",
+      "id": 28
+    },
+    {
+      "name": "buy sth",
+      "check": "false",
+      "id": 29
     }
   ]
 }

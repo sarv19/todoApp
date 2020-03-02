@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import { Link } from "react-router-dom";
 
 interface IProps {
   action: any;
@@ -53,9 +54,9 @@ function InputHead({ action, addTodo, changeCheckAll }: IProps) {
         onChange={e => changeText(e.target.value)}
         onKeyDown={e => (e.keyCode === 13 ? keyDown(!key) : null)}
       />
-      <a target="_blank" href="/add-item">
+      <Link to="/add-item">
         <button>Add Item</button>
-      </a>
+      </Link>
     </div>
   );
 }
